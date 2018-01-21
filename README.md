@@ -4,15 +4,20 @@
 大致思路如下
 
 1. 使用fidder工具抓包，可以看到发送的数据中有sign一串数据，不知道这个数据是如何得来的，所以无法通过python url 来模仿获取数据。
- hh
- 方式：POST
- 
- URL：/question/fight/findQuiz
 
-   ![Alt text](E:/qiuwe/Pictures/Camera Roll/111.png)
+
+   方式：POST
+ 
+ 
+   URL：/question/fight/findQuiz
+   
+   
+   ![Alt text](https://github.com/weiqiu/Wechat_brain_king/blob/master/pic/111.png)
 
 2.  抓包发现返回的 js 数据中就是题目和题目的选项，如下，如此可以直接修改fiddler custom rules 抓取 Response 数据保存在本地 tmp 文件中.
-![Alt text](./1516535491653.png)
+
+
+    ![Alt text](https://github.com/weiqiu/Wechat_brain_king/blob/master/pic/2.png)
 
 3. python 端 读取tmp文件获取题目和选项，然后通过 百度知道搜索题目，根据选项出现次数制定不同的选择策略，并将答题记录保存在 answer_log.txt 文件中，
 4.  自动做出选择之后可以通过adb 命令来自动答题
@@ -21,6 +26,7 @@
 > 答题记录
 
 1. 答题记录举例如下，会先在本地题库搜索题目，如没有记录，再在网络搜索，根据关键词的次数来做出选择，该题结束后也会从Server端获取该题目的正确答案并添加到本地题库
+
 
     题目1:马铃薯的原产地是哪个国家或地区？
   
