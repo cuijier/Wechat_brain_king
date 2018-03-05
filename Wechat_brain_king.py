@@ -18,6 +18,9 @@ class brain_king:
 
 
     def Get_qus_choose(self):
+        '''
+        Return question, answer_choose[A,B,C,D], question index
+        '''
         try:
             with open('D:\\tmp.txt','r',encoding='utf-8-sig') as f:
                 content = f.readline()
@@ -28,6 +31,9 @@ class brain_king:
 
 
     def Zhidao_baidu(self,keyword):
+        '''
+        return keyword search_result text
+        '''
         payload = {
             'lm':'0',
             'rm':'20',
@@ -48,6 +54,9 @@ class brain_king:
         return r.text
 
     def make_choose(self,web_txt,Content):
+        '''
+        find local db first then search internet
+        '''
         if Content[0] in self.question_db:
             return self.question_db[Content[0]]
         else:
@@ -55,7 +64,9 @@ class brain_king:
                 self.score[i] = web_txt.count(str(Content[i]))
                 print(self.score[i], Content[i])
             '''
-            判断条件策越
+            选择策越添加，当前只添加两条策略
+            1,如果权重最大和权重最轻相等，则此类题目无法做出选择
+            2,如果词频为0 的只有一个选项，则选此选项，否则选择词频最高的
             '''
             if min(self.score) == max(self.score):
                 print('Can''t make choose,please choose by your self \n')
@@ -66,6 +77,9 @@ class brain_king:
                 return self.score.index(max(self.score))
 
     def Get_right_answer(self,Content):
+        '''
+        Read right answer from Answer.txt[tmp] and save to local question_db.txt
+        '''
         try:
             with open('D:\\Answer.txt','r',encoding='utf-8-sig') as f:
                 content = f.readline()
